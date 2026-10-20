@@ -5,7 +5,10 @@
 4.按Ctrl+C，複製
 5.點選resource/views/admin/login.blade.php
 6.Ctrl+V，貼上
-7.把css, js 路徑改為從根目錄開始，在20,55,56
+7.把css, javascript 路徑全部改為從根目錄(/)開始
+href="../css/style.css"改為href="/css/style.css"
+src="../js/main.js"改為 src="/js/main.js"
+src="../js/admin.js"改為 src="/js/admin.js"
 -->
 
 <!DOCTYPE html>
@@ -28,12 +31,34 @@
       <p>請使用管理員帳號登入（示範：admin / admin1234）</p>
     </div>
 
-    <form data-login>
+    <!--
+        step1:
+        action:資料輸入後送到哪個網址 
+        method:送出的方法，通常只有get及post, laravel還另有put, patch, delete 三種方法
+        表單一般用post, 可轉大量資料，且不會出現在網址列，較安全
+        所有要送出的資料欄位都要寫在<form>與</form>之間。
+        @csrf: 權杖(token)，在laravel中所有表單都要加上@csrf, 表示是由自己網站所送出的不是由他人在遠端送出資 ，保䧐網站的安全
+        @csrf會自動轉換如下:
+        <input type="hidden" name="_token" value="xxxxxxxxxxxxxxxx" autocomplete="off">
+
+        step2:要在路由中設定Route::post("/admin/login",[AdminControler:class, "login"]);
+        為何要用Route post::, 因為form method="post"
+        Step3:要在AdminControler中新增public function login()
+
+    -->
+
+    <form action="/admin/login" method="post">
+        @csrf
       <div class="form-group">
         <label class="form-label" for="username">帳號</label>
         <div class="input-icon-wrap">
           <i class="fa fa-user-shield icon"></i>
-          <input type="text" id="username" name="username" class="form-control" required autofocus />
+          <!-- name:後端接收資料的名稱id是給瀏覽器或javascript控制用的
+           required:使用jquery的必填
+           autofocus:自動取得焦點，游標會自動停佇在這裡
+           class="form-control",boostrap 中輸入框的css
+            -->
+          <input type="text" id="username" name="userId" class="form-control" required autofocus />
         </div>
       </div>
       <div class="form-group">
