@@ -83,8 +83,18 @@ class AdminController extends Controller
         session()->put("userId",$userId):將所輸入的帳號及密碼存在伺服器中，名稱為"userId"
         */
         session()->put("userId", $userId);
+        /*
         //轉址到後台首頁
+        1.在路由routes/web.php中加上 /admin/home
+        2.在AdminController中新增 public function home()
+        3.在resources/view/admin 中新增home.blade.php
+        */
         return redirect("/admin/home");
     }
+    }
+    //後台首頁
+    public function home()
+    {
+        return view("admin.home");
     }
 }

@@ -34,4 +34,12 @@ class Manager extends Model
     return $manager;
     }
 
+    //檢查帳號
+    public function checkAccount(string $userId)
+    {
+        //相關說明參閱上方的checkManager
+        $manager = self::where("userId", $userId)->first();
+        return $manager;
+    }
+
 }

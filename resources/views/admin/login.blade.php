@@ -28,7 +28,17 @@ src="../js/admin.js"改為 src="/js/admin.js"
     <div class="auth-logo"><div class="logo-box">B</div><span>品牌名稱</span></div>
     <div class="auth-title">
       <h2>後台管理系統</h2>
-      <p>請使用管理員帳號登入（示範：admin / admin1234）</p>
+      <!-- 這是html的註解 -->
+       {{--這是laravel blade 的註解
+      msg:由AdminController login function 回傳的錯誤訊息名稱
+      在blade中的條件判斷式、廻圈..等都要有結束符號，例如:if endif, for endfor, foreach endforeach, section endsection 其他程式語言則為 if{}、for{}foreach{}、while{}、 ...
+      --}}
+      
+      <p>@if ($errors->has("msg"))
+        <font color="red">{{$errors->first("msg")}}</font>
+        @endif
+      </p>
+        
     </div>
 
     <!--
@@ -57,8 +67,10 @@ src="../js/admin.js"改為 src="/js/admin.js"
            required:使用jquery的必填
            autofocus:自動取得焦點，游標會自動停佇在這裡
            class="form-control",boostrap 中輸入框的css
+           value:這個欄位所輸入的值
+           old:原本輸入的文字
             -->
-          <input type="text" id="username" name="userId" class="form-control" required autofocus />
+          <input type="text" id="username" name="userId" class="form-control" autofocus value="{{ old('userId') }}" />
         </div>
       </div>
       <div class="form-group">
