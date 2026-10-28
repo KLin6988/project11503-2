@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\MileStoneController;
+use App\Http\Controllers\Admin\MileStoneTypeController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 所有的網址 (超連結，href)或表單(form)都要在路由中設定
@@ -31,3 +34,12 @@ Route::get("/manager/edit/{id}",[ManagerController::class,"edit"]);//修改帳�
 Route::post("/manager/update",[ManagerController::class,"update"]);//更新帳號
 Route::get("/manager/delete/{id}",[ManagerController::class,"delete"]);//刪除帳號
 Route::post("/manager/checkAccount",[ManagerController::class,"checkAccount"]);//檢查帳號
+
+//大事記管理
+Route::get("/admin/milestone/list", [MileStoneController::class, "list"]);
+//大事記管理
+Route::get("/admin/milestone/types/list", [MileStoneTypeController::class, "list"]);
+//新增大事記類別
+Route::get("/admin/milestone/types/create", [MileStoneTypeController::class, "create"]);
+//儲存大事記類別
+Route::post("/admin/milestone/types/store", [MileStoneTypeController::class, "store"]);
